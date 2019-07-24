@@ -1,6 +1,14 @@
 
 
 <script>
+/*
+  Created by: Lightnet
+
+  License: MIT
+
+  Information: Prototype build.
+
+*/
 //import HelloWorld from "./components/HelloWorld.vue";
 import AppHeaderNavigationComponent from "./components/mainwindow/AppHeaderNavigationComponent.vue";
 import HeaderSplitterComponent from "./components/mainwindow/HeaderSplitterComponent.vue";

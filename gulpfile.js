@@ -37,7 +37,7 @@ exports.backend_build = backend_build;
 
 function watch(done) {
     gulp.watch(['./app.js','./src/server/**/*.*'], gulp.series(backend_build));
-    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontend_build, copy_html, copy_css, refreshbrowser));
+    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontend_build, copy_html, copy_css));
     return done();
 }
 exports.watch = watch;
@@ -63,6 +63,15 @@ exports.copy_svg = copy_svg;
 function serve(done){
     var stream = nodemon({
         script: 'backend.js',
+        ext: 'html js',
+        ignore:[
+            'node_modules/',
+            'data/',
+            '.vscode/',
+            'gulpfile.js',
+            'webpack.config.js,',
+            'webpack.config.dev.js,',
+        ],
         done: done
 	}).on('start', function () {
 		// to avoid nodemon being started multiple times
@@ -72,11 +81,17 @@ function serve(done){
 			started = true; 
 		} 
 	}).on('restart', function () {
-        console.log('restarted!')
+        console.log('restarted!');
+        //frontend_build();
+        //refreshbrowser();
+        if(browserSync){
+            browserSync.reload();
+        }
     }).on('crash', function() {
         console.error('Application has crashed!\n');
         stream.emit('restart', 10);  // restart the server in 10 seconds
     });
+    return stream;
 }
 exports.serve  = serve;
 

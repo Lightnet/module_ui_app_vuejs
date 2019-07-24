@@ -82,7 +82,7 @@ export default {
   <div :id="id" class="editorcomp">
     <EditorHeaderComponent>
       <!--Header Editor <button v-on:click="btntest"> Test </button>-->
-      <EditorMenuComponent v-on:editorevent="handle_editor" />
+      <EditorMenuComponent  v-bind:menus="editortype" v-on:editorevent="handle_editor" />
     </EditorHeaderComponent>
     <EditorContextComponent>
       <!--Context Editor-->
