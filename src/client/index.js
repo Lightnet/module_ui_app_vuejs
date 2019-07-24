@@ -8,6 +8,7 @@ Vue.use(Vuex);
 import App from './App.vue';
 import style from "./global.css";
 import Gun from "gun/gun";
+import "gun/lib/then";
 import SEA from "gun/sea";
 import mjs from "./mjs";
 //console.log(Vue);

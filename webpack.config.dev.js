@@ -7,6 +7,7 @@ console.log(path.resolve(__dirname, 'public'))
 module.exports = {
     mode: "development",
     entry: [
+        '@babel/polyfill',
         './src/client/index.js'
     ],
     module: {

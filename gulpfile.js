@@ -72,6 +72,7 @@ function serve(done){
             'webpack.config.js,',
             'webpack.config.dev.js,',
         ],
+        tasks:['frontend_build'],
         done: done
 	}).on('start', function () {
 		// to avoid nodemon being started multiple times

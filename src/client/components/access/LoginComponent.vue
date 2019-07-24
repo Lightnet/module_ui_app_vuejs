@@ -10,7 +10,7 @@ export default {
     return {
       id:uuidv4(),
       loginid:"Guest",
-      password:"Guest",
+      password:"guest",
       gun:null,
       user:null,
     }
@@ -20,33 +20,38 @@ export default {
     //console.log(this);
     this.gun = this.$root.$gun;
     this.user =this.gun.user && this.gun.user();
-    console.log(this.gun);
+    //console.log(this.gun);
   },
   methods:{
     btnlogin(){
-      console.log("btnlogin");
-      console.log(this.loginid);
-      console.log(this.password);
+      //console.log("btnlogin");
+      //console.log(this.loginid);
+      //console.log(this.password);
       this.user.auth(this.loginid, this.password,this.handle_loggin);
     },
     handle_loggin(e){
       if(e.err){
-        console.log("ERROR!")
+        console.log("ERROR!");
         return;
       }
       console.log('auth ack:', e);
-      mutations.setUser(this.loginid)
-      mutations.setPub(e.sea.pub);
+      mutations.setUser(this.loginid);
+      mutations.setSea(e.sea);
       mutations.setLogin(true);
     },
     btnregister(){
       console.log("btnregister");
-
       this.user.create(this.loginid,this.password,this.handle_register)
     },
     handle_register(e){
       console.log('created ack:', e)
     }
+  },
+  destroyed(){
+    this.gun=null;
+    this.user=null;
+    this.loginid=null;
+    this.password=null;
   }
 };
 </script>

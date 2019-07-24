@@ -10,6 +10,9 @@ export const store = Vue.observable({
     username:"unknown",
     loginid:"",
     password:"Guest",
+    epriv:"",
+    epub:"",
+    priv:"",
     pub:"",
     hashid:"",
     sessionhash:"",
@@ -30,8 +33,19 @@ export const mutations = {
     setLogin(value){
         store.blogin = value;
     },
-    setPub(value){
-        store.pub = value;
+    setSea(sea){
+        store.epriv = sea.epriv;
+        store.epub = sea.epub;
+        store.priv = sea.priv;
+        store.pub = sea.pub;
+    },
+    pair(){
+        return {
+            epriv:store.epriv,
+            epub:store.epub, 
+            priv:store.priv,
+            pub:store.pub
+        }
     }
 };
 

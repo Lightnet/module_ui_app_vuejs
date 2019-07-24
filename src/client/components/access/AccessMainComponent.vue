@@ -3,9 +3,9 @@ import LoginComponent from "./LoginComponent";
 import DisplayUserComponent from "./DisplayUserComponent";
 
 import UserProfileComponent from "./UserProfileComponent";
-import UserChangePasswordComponent from "./UserChangePasswordComponent";
+import UserChangePassphaseComponent from "./UserChangePassphaseComponent";
 import UserContactsComponent from "./UserContactsComponent";
-import UserSetForgotComponent from "./UserSetForgotComponent";
+import UserPassphaseHintComponent from "./UserPassphaseHintComponent";
 
 
 import uuidv4 from "uuid/v4";
@@ -17,8 +17,8 @@ export default {
     DisplayUserComponent,
     UserProfileComponent,
     UserContactsComponent,
-    UserSetForgotComponent,
-    UserChangePasswordComponent,
+    UserPassphaseHintComponent,
+    UserChangePassphaseComponent,
   },
   computed: {
     UserName() {
@@ -35,8 +35,8 @@ export default {
       navmenus:[
         {name:"Profile",context:"profile",comp:UserProfileComponent},
         {name:"Contacts",context:"contacts",comp:UserContactsComponent},
-        {name:"Forgot",context:"forgot",comp:UserSetForgotComponent},
-        {name:"Change Password",context:"changepassword",comp:UserChangePasswordComponent},
+        {name:"Passphase Hint",context:"passphasehint",comp:UserPassphaseHintComponent},
+        {name:"Change Passphase",context:"changepassphase",comp:UserChangePassphaseComponent},
       ]
     }
   },
