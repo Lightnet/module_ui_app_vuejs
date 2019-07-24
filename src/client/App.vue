@@ -32,15 +32,22 @@ export default {
   },
   mounted(){
     //console.log("this");
-    //console.log(this);
+    //https://vuejs.org/v2/guide/state-management.html
+    //console.log(this.$root);
+    //console.log(this.$root.$data);
     this.$root.$eventHub.$on('eventhub',(e)=>{
       console.log("app test");
     });
+
   },
   beforeDestroy() {
     this.$root.$eventHub.$off('eventhub');
   },
 };
+/*
+properties
+access
+*/
 </script>
 
 <style>
@@ -60,7 +67,7 @@ export default {
     <HeaderSplitterComponent />
     <AppContentComponent>
 
-      <EditorMainComponent />
+      <EditorMainComponent editorcontext="access" />
 
     </AppContentComponent>
     

@@ -31,6 +31,7 @@ var { server } = app.listen(PORT, err => {
 });
 var gunconfig = {
     file: 'data',
+    //radisk:false,
     //web:app.server //server
     web:server
 };
@@ -44,12 +45,12 @@ gun.on('bye', (peer)=>{// peer disconnect
   //console.log('disconnected from', peer);
   console.log('disconnected from peer!');
 });
-/*
+
 gun.get('mark').put({
   name: "Mark",
   email: "mark@gunDB.io",
 });
-
+/*
 gun.get('mark').on(function(data, key){
   console.log("update:", data);
 });
