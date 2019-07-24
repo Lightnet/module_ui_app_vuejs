@@ -63,25 +63,11 @@ export default {
 <style>
   .accesscomp{
     width:100%;
-    height:22px;
-    background-color: #333;
+    height:100%;
+    background-color: gray;
     color: white;
   }
 
-  a{
-    color: white;
-    background-color: black;
-    height:22px;
-    padding:0;
-    margin:0;
-    line-height:22px;
-    font-size: 12px;
-    text-decoration: none;
-    /*display: block;*/
-  }
-  a:hover{
-    background-color: gray;
-  }
 </style>
 <template>
   <div :id="id" class="accesscomp">

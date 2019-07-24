@@ -3,7 +3,6 @@ import uuidv4 from "uuid/v4";
 import EditorHeaderComponent from "./EditorHeaderComponent";
 import EditorContextComponent from "./EditorContextComponent";
 import EditorFooterComponent from "./EditorFooterComponent";
-//import EditorMenuComponent from "./EditorMenuComponent";
 
 import PreferencesEditorComponent from "../preferences/PreferencesEditorComponent";
 import PropertiesEditorComponent from "../properties/PropertiesEditorComponent";
@@ -24,7 +23,6 @@ export default {
     EditorHeaderComponent,
     EditorContextComponent,
     EditorFooterComponent,
-    //EditorMenuComponent,
 
     PreferencesEditorComponent,
     PropertiesEditorComponent,
@@ -107,7 +105,6 @@ export default {
   <div :id="id" class="editorcomp">
     <EditorHeaderComponent>
       <!--Header Editor <button v-on:click="btntest"> Test </button>-->
-      <!--<EditorMenuComponent  v-bind:menus="editortype" v-on:editorevent="handle_editor" />-->
       <DropDownMenuComponent v-bind:menus="editortype" v-on:select="handle_menuselect" :bselectname="true" :SelectName="editorcontext" />
 
     </EditorHeaderComponent>

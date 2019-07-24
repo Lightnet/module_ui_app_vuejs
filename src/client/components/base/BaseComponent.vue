@@ -16,7 +16,7 @@ export default {
 };
 </script>
 <style>
-  .base{
+  .basecomp{
     width:100%;
     height:22px;
     background-color: #333;
@@ -24,7 +24,7 @@ export default {
   }
 </style>
 <template>
-  <div :id="id" class="base">
+  <div :id="id" class="basecomp">
       Base
   </div>
 </template>

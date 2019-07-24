@@ -52,9 +52,9 @@ access
 
 <style>
 #app {
-  font-size: 18px;
-  font-family: 'Roboto', sans-serif;
-  color: blue;
+  /*font-size: 18px;*/
+  /*font-family: 'Roboto', sans-serif;*/
+  /*color: blue;*/
   width:100%;
   height:calc(100% - 22px - 22px - 10px);
 }

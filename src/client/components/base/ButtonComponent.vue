@@ -20,7 +20,7 @@ export default {
 };
 </script>
 <style>
-  div{
+  .btncomp{
     width:100%;
     height:22px;
     background-color: #333;
@@ -28,7 +28,7 @@ export default {
   }
 </style>
 <template>
-  <div :id="id">
+  <div :id="id" class="btncomp">
       Footer
   </div>
 </template>

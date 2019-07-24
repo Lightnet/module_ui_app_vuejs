@@ -16,7 +16,7 @@ export default {
 };
 </script>
 <style>
-  .base{
+  .viewport3dcomp{
     width:100%;
     height:100%;
     background-color: #333;
@@ -24,7 +24,7 @@ export default {
   }
 </style>
 <template>
-  <div :id="id" class="base">
+  <div :id="id" class="viewport3dcomp">
       Viewport3DEditorComponent
   </div>
 </template>

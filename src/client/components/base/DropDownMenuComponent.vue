@@ -88,7 +88,7 @@ export default {
 </script>
 <style>
   .dropbtn {
-    background-color: #3498DB;
+    background-color: #333;
     color: white;
     height:22px;
     border: none;
@@ -107,6 +107,7 @@ export default {
   .dropdown-content {
     position: absolute;
     color: white;
+    background-color: #333;
     /*background-color: #f1f1f1;*/
     min-width: 128px;
     overflow: auto;

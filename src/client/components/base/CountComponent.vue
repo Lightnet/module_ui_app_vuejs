@@ -1,10 +1,4 @@
-<template>
-  <div>
-    <p>Count: {{ count }}</p>
-    <button @click="setCount(count + 1);">+ 1</button>
-    <button @click="setCount(count - 1);">- 1</button>
-  </div>
-</template>
+
 
 <script>
   import { store, mutations } from "../../mjs";
@@ -20,3 +14,11 @@
     }
   };
 </script>
+
+<template>
+  <div>
+    <p>Count: {{ count }}</p>
+    <button @click="setCount(count + 1);">+ 1</button>
+    <button @click="setCount(count - 1);">- 1</button>
+  </div>
+</template>

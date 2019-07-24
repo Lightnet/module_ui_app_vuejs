@@ -16,7 +16,7 @@ export default {
 };
 </script>
 <style>
-  div{
+  .inputcomp{
     width:100%;
     height:22px;
     background-color: #333;
@@ -24,7 +24,7 @@ export default {
   }
 </style>
 <template>
-  <div :id="id">
+  <div :id="id" class="inputcomp">
       Footer
   </div>
 </template>
