@@ -81,10 +81,24 @@ export default {
 
 <template>
   <div :id="id">
-      <br>Change Forgot Hint
-      <br>Question #1:<input type="text" v-model="question1">
-      <br>Question #2:<input type="text" v-model="question2">
-      <br>Hint:<input type="text" v-model="hint">
-      <br><button @click="clickchangehint">Change</button>
+    Recover Hint Passphase:
+    <table>
+    <tr>
+      <td>Question 1</td>
+      <td><input v-model="question1"></td>
+    </tr>
+    <tr>
+      <td>Question 1</td>
+      <td><input v-model="question2"></td>
+    </tr>
+    <tr>
+      <td>Hint</td>
+      <td><input v-model="hint"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button @click="clickchangehint">Sumbit</button></td>
+    </tr>
+    </table>
   </div>
 </template>

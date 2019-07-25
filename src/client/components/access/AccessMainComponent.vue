@@ -6,6 +6,7 @@ import UserProfileComponent from "./UserProfileComponent";
 import UserChangePassphaseComponent from "./UserChangePassphaseComponent";
 import UserContactsComponent from "./UserContactsComponent";
 import UserPassphaseHintComponent from "./UserPassphaseHintComponent";
+//import AliasSearchComponent from "./AliasSearchComponent";
 
 
 import uuidv4 from "uuid/v4";
@@ -19,6 +20,7 @@ export default {
     UserContactsComponent,
     UserPassphaseHintComponent,
     UserChangePassphaseComponent,
+    //AliasSearchComponent,
   },
   computed: {
     UserName() {

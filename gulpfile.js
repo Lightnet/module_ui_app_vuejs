@@ -37,7 +37,8 @@ exports.backend_build = backend_build;
 
 function watch(done) {
     gulp.watch(['./app.js','./src/server/**/*.*'], gulp.series(backend_build));
-    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontend_build, copy_html, copy_css));
+    //gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontend_build, copy_html, copy_css));
+    gulp.watch(['./src/client/**/*.*'], gulp.series( frontend_build, copy_html, copy_css));
     return done();
 }
 exports.watch = watch;
@@ -72,7 +73,7 @@ function serve(done){
             'webpack.config.js,',
             'webpack.config.dev.js,',
         ],
-        tasks:['frontend_build'],
+        //tasks:['frontend_build'],
         done: done
 	}).on('start', function () {
 		// to avoid nodemon being started multiple times
