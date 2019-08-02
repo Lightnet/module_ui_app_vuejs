@@ -1,4 +1,13 @@
 <script>
+/*
+  Created by: Lightnet
+
+  License: MIT
+
+  Information: Prototype build.
+
+*/
+
 export default {
   props:{
     showModal:{type:Boolean,default:false}

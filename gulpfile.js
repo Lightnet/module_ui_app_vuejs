@@ -4,29 +4,49 @@
 const mode = process.env.NODE_ENV || 'development';
 const dev = mode === 'development';
 const prod = mode === 'production';
+console.log("mode: ",mode);
 var started = false;
+//https://github.com/shama/webpack-stream/issues/122
+const fs                    = require('fs');
+const path                  = require('path');
+const gulp                  = require('gulp');
+//const clean               = require('gulp-clean');
+const del                   = require('del');
+const rename                = require('gulp-rename');
+const nodemon               = require('gulp-nodemon');
+const browserSync           = require('browser-sync').create();
+const webpack               = require('webpack');
+const webpackStream         = require('webpack-stream');
 
-const fs            = require('fs');
-const path          = require('path');
-const gulp          = require('gulp');
-const clean         = require('gulp-clean');
-const rename        = require('gulp-rename');
-const nodemon       = require('gulp-nodemon');
-const browserSync   = require('browser-sync').create();
-const webpack       = require('webpack-stream');
-
+var frontend_webpackconfig  = require('./webpack.config.dev.js');
 async function cleanbundle(done){
-    return gulp.src(['public/bundle.js','public/bundle.js.map'], {read: false, allowEmpty:true})
-        .pipe(clean());
+    //return gulp.src(['public/bundle.js','public/bundle.js.map'], {read: false, allowEmpty:true})
+        //.pipe(clean());
+    return del(['public/bundle.js'], {dryRun: true});
 }
 
 function frontend_build(){
+    //let watch = Object.create(frontend_webpackconfig);
+    let watch = frontend_webpackconfig;
+    watch.watch = true;
     return gulp.src('src/client/index.js')
-        .pipe(webpack(require('./webpack.config.dev.js')))
+        .pipe(webpackStream(watch, webpack))
         //.pipe(rename('bundle.js'))
         .pipe(gulp.dest('public/'));
 }
 exports.frontend_build = frontend_build;
+
+function frontend_watch_webpack_build(done){
+    //let watch = Object.create(frontend_webpackconfig);
+    let watch = frontend_webpackconfig;
+    watch.watch = true;
+    return gulp.src('src/client/index.js')
+        .pipe(webpackStream(watch, webpack))
+        //.pipe(rename('bundle.js'))
+        .pipe(gulp.dest('public/'))
+    done();
+}
+exports.frontend_watch_webpack_build = frontend_watch_webpack_build;
 
 function backend_build(){
     return gulp.src('./app.js')
@@ -38,10 +58,17 @@ exports.backend_build = backend_build;
 function watch(done) {
     gulp.watch(['./app.js','./src/server/**/*.*'], gulp.series(backend_build));
     //gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontend_build, copy_html, copy_css));
-    gulp.watch(['./src/client/**/*.*'], gulp.series( frontend_build, copy_html, copy_css));
+    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, copy_html, copy_css));
+    gulp.watch(['./src/common/**/*.*'], gulp.series( copy_jslib));
     return done();
 }
 exports.watch = watch;
+
+function copy_jslib(){
+    return gulp.src('src/common/gunjstrustsharekey.js')
+        .pipe(gulp.dest('public/'));
+}
+exports.copy_jslib = copy_jslib;
 
 function copy_html(){
     return gulp.src('src/client/index.html')
@@ -115,6 +142,7 @@ function browser_sync(done){
 exports.refreshbrowser  = refreshbrowser;
 
 //gulp.series(frontend_build, backend_build, copy_css, copy_html, copy_svg, watch, serve, browser_sync);
-const build = gulp.series(frontend_build, backend_build, copy_html,copy_css, watch, serve, browser_sync );
+//const build = gulp.series(frontend_build, backend_build, copy_html,copy_css, copy_jslib, watch, serve, browser_sync );
+const build = gulp.series(backend_build, copy_html,copy_css, copy_jslib, watch, serve, browser_sync , frontend_watch_webpack_build);
 
 exports.default = build;

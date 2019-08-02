@@ -5,12 +5,10 @@ const path          = require('path');
 console.log(path.resolve(__dirname, 'public'))
 
 module.exports = {
-    entry: [
-        //polyfill: '@babel/polyfill',
-        //main: './src/client/index.js'
-        './src/client/index.js'
-    ],
     mode: "development",
+    entry: {
+        main:'./src/client/index.js'
+    },
     module: {
         rules: [
             { test: /\.js$/, use: 'babel-loader' },
@@ -24,10 +22,21 @@ module.exports = {
         }),
         new VueLoaderPlugin()
     ],
+    resolve: {
+        alias: {
+          'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
+        },
+        extensions: ['*', '.js', '.vue', '.json']
+    },
     output:{
         path: path.resolve(__dirname, 'public'),
         publicPath: '/',
-        filename: 'js/[name].bundle.js',
-        chunkFilename: 'js/[id].chunk.js'
+        filename: 'bundle.js',
+        chunkFilename: '[id].chunk.js'
+    },
+    watchOptions: {
+        aggregateTimeout: 900000,
+        poll: 900000, // Check for changes every second
+        ignored: ['src/server/**/*.js', 'node_modules']
     }
 };

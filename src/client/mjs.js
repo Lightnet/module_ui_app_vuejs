@@ -1,3 +1,8 @@
+/*
+*
+*
+*/
+
 import Vue from 'vue';
 
 export var version = "0.0.1";
