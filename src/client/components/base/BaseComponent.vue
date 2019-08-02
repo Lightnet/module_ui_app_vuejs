@@ -1,9 +1,15 @@
 <script>
 /*
-  Created By: Lightnet
-
+  Project Name: module_ui_app_vuejs
   
+  Created by: Lightnet
+
+  License: MIT
+
+  Information: Prototype build.
+
 */
+
 import uuidv4 from "uuid/v4";
 export default {
   components:{

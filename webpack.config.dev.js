@@ -33,5 +33,10 @@ module.exports = {
         publicPath: '/',
         filename: 'bundle.js',
         chunkFilename: '[id].chunk.js'
+    },
+    watchOptions: {
+        aggregateTimeout: 900000,
+        poll: 900000, // Check for changes every second
+        ignored: ['src/server/**/*.js', 'node_modules']
     }
 };

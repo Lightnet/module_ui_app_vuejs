@@ -1,8 +1,14 @@
-//===============================================
-// Project Name: module_ui_app_vuejs
-// Created By: Lightnet
-//
-//===============================================
+/*
+  Project Name: module_ui_app_vuejs
+  
+  Created by: Lightnet
+
+  License: MIT
+
+  Information: Prototype build.
+
+*/
+
 import '@babel/polyfill';
 import Vue from 'vue';
 //https://vuex.vuejs.org/guide/

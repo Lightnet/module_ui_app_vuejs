@@ -25,23 +25,41 @@ async function cleanbundle(done){
     return del(['public/bundle.js'], {dryRun: true});
 }
 
-function frontend_build(){
+function frontend_build(done){
     //let watch = Object.create(frontend_webpackconfig);
     let watch = frontend_webpackconfig;
-    watch.watch = true;
+    //watch.watch = true;
     return gulp.src('src/client/index.js')
-        .pipe(webpackStream(watch, webpack))
+        .pipe(webpackStream(watch, webpack,(error, stats)=>{
+            if (hasErrors(stats)){
+
+            }else if (typeof done === 'function') {
+                done();
+            }
+        }))
         //.pipe(rename('bundle.js'))
         .pipe(gulp.dest('public/'));
 }
 exports.frontend_build = frontend_build;
-
+//https://github.com/mzgoddard/hard-source-webpack-plugin/issues/296
 function frontend_watch_webpack_build(done){
     //let watch = Object.create(frontend_webpackconfig);
     let watch = frontend_webpackconfig;
-    watch.watch = true;
+    //watch.watch = true;
     return gulp.src('src/client/index.js')
-        .pipe(webpackStream(watch, webpack))
+        .pipe(webpackStream(watch, webpack, function(error, stats){
+            if (stats){
+                console.log("???")
+            }else if (typeof done === 'function') {
+                console.log("[==done==]");
+                done();
+            }
+
+            if (typeof done === 'function') {
+                console.log("==DONE==");
+                done();
+            }
+        }))
         //.pipe(rename('bundle.js'))
         .pipe(gulp.dest('public/'))
     done();
@@ -58,7 +76,7 @@ exports.backend_build = backend_build;
 function watch(done) {
     gulp.watch(['./app.js','./src/server/**/*.*'], gulp.series(backend_build));
     //gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontend_build, copy_html, copy_css));
-    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, copy_html, copy_css));
+    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontend_watch_webpack_build, copy_html, copy_css));
     gulp.watch(['./src/common/**/*.*'], gulp.series( copy_jslib));
     return done();
 }
@@ -143,6 +161,6 @@ exports.refreshbrowser  = refreshbrowser;
 
 //gulp.series(frontend_build, backend_build, copy_css, copy_html, copy_svg, watch, serve, browser_sync);
 //const build = gulp.series(frontend_build, backend_build, copy_html,copy_css, copy_jslib, watch, serve, browser_sync );
-const build = gulp.series(backend_build, copy_html,copy_css, copy_jslib, watch, serve, browser_sync , frontend_watch_webpack_build);
+const build = gulp.series(frontend_watch_webpack_build, backend_build, copy_html,copy_css, copy_jslib, watch, serve, browser_sync);
 
 exports.default = build;
