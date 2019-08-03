@@ -54,11 +54,10 @@ function frontend_watch_webpack_build(done){
                 console.log("[==done==]");
                 done();
             }
-
-            if (typeof done === 'function') {
-                console.log("==DONE==");
-                done();
-            }
+            //if (typeof done === 'function') {
+                //console.log("==DONE==");
+                //done();
+            //}
         }))
         //.pipe(rename('bundle.js'))
         .pipe(gulp.dest('public/'))

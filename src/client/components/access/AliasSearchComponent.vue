@@ -49,46 +49,33 @@ export default {
                 this.skills = '';
                 return;
             }
-            this.alias = who;
+            //this.alias = who;
 
             let identity = await to.get('alias').then();
             this.identity = identity;
-            //let alias = await to.get('profile').get('alias').then();
-            this.searchprofile()
-        },
-        async searchprofile(){
             let self = this;
-            let user = this.$gun.user();
-            let find = this.$gun.user(this.pubid);
-            find.get('profile').on(function(data, key, at, ev){//get map data
-                //console.log(data);
-                //console.log(key);
-                ev.off(); //pervent loops listen add on?
-                Gun.node.is(data, async function(v, k){
-                    //console.log(k);// variable
-                    //console.log(v);// crypt
-                    var key = await find.get('trust').get(user.is.pub).get(k+'profile').then();
-                    var mix = await Gun.SEA.secret(await find.get('epub').then(), mutations.pair());
-                    key = await Gun.SEA.decrypt(key, mix);
-                    var val = await Gun.SEA.decrypt(v, key);
-
-                    if(k == 'alias'){
-                        self.alias = val || v
-                    }
-                    if(k == 'born'){
-                        self.born = val || v
-                    }
-                    if(k == 'education'){
-                        self.education = val || v
-                    }
-                    if(k == 'skills'){
-                        self.skills = val || v
-                    }
-                    //console.log(val);
-                });
+            //let alias = await to.get('profile').get('alias').then();
+            to.get('profile').get('alias').decryptdata(to,ack=>{
+                console.log("ack",ack);
+                self.alias = ack;
             });
-        },
+            /*
+            to.get('profile').get('born').decryptdata(to,ack=>{
+                console.log("ack",ack);
+                self.born = ack;
+            });
 
+            to.get('profile').get('education').decryptdata(to,ack=>{
+                console.log("ack",ack);
+                self.education = ack;
+            });
+
+            to.get('profile').get('skills').decryptdata(to,ack=>{
+                console.log("ack",ack);
+                self.skills = ack;
+            });
+            */
+        },
         async getprofilevar(_name,_value){
 			let user = this.$gun.user();
             let pkey = await user.get('trust').get(user.is.pub).get(_name+'profile').then();
@@ -116,10 +103,6 @@ export default {
                 <input :value="value" @input="lookupalias">
             -->
             <td><input v-model="pubid" @input="lookupalias"></td>
-        </tr>
-        <tr>
-            <td>Identity</td>
-            <td><input v-model="identity" disabled></td>
         </tr>
         <tr>
             <td>Alias</td>

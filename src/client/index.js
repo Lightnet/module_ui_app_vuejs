@@ -8,18 +8,25 @@
   Information: Prototype build.
 
 */
-
+console.log("init script...s");
 import '@babel/polyfill';
 import Vue from 'vue';
 //https://vuex.vuejs.org/guide/
 import Vuex from 'vuex'
 Vue.use(Vuex);
 import App from './App.vue';
-import style from "./global.css";
-import Gun from "gun/gun";
-import "gun/lib/then";
-import SEA from "gun/sea";
+//import style from "./global.css";
+import "./global.css";
+//import Gun from "gun/gun";
+//import "gun/lib/then";
+//import '../common/gunjstrustsharekey';
+//import SEA from "gun/sea";
 import mjs from "./mjs";
+
+
+localStorage.clear();
+
+
 //console.log(Vue);
 //===============================================
 // Event Hub

@@ -1,6 +1,7 @@
 /*
     Self contain Sandbox Gun Module:
     
+
     Created by: Lightnet
 
     Credit: amark ( https://github.com/amark/gun)
@@ -593,11 +594,12 @@
 
         if (gun._.$ instanceof Gun.User){//check gun node is user object
             //console.log("User PASS");
-            opt.sharekeytype = "path";
+            opt.sharekeytype = opt.sharekeytype || "path";
         }else{
             //console.log("Gun PASS");
-            opt.sharekeytype = "graph";
+            opt.sharekeytype = opt.sharekeytype || "graph";
         }
+        console.log(gun);
     
         gun.back(function(at){ if(at.is){ return } path += (at.get||'') });
         (async function(){
